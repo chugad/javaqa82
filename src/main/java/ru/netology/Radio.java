@@ -8,14 +8,13 @@ public class Radio {
     private int currentSoundVolume;
     private int minSoundVolume;
     private int maxSoundVolume;
+    private boolean mute;
 
-//    station
+    // station
 
-    public int getCurrentStationNumber() {
-        return currentStationNumber;
-    }
-
-    public void setCurrentStationNumber(int currentStationNumber) { // будем считать что этим методом реализована функция нажатия кнопок на пульте от 0 до 9
+    public Radio(int currentStationNumber, int minStationNumber, int maxStationNumber) {
+        this.minStationNumber = minStationNumber;
+        this.maxStationNumber = maxStationNumber;
         if (currentStationNumber > maxStationNumber) {
             return;
         }
@@ -26,23 +25,9 @@ public class Radio {
         }
     }
 
-//    public int getMinStationNumber() {
-//        return minStationNumber;
-//    }
-
-    public void setMinStationNumber(int minStationNumber) {
-        this.minStationNumber = minStationNumber;
+    public int getCurrentStationNumber() {
+        return currentStationNumber;
     }
-
-//    public int getMaxStationNumber() {
-//        return maxStationNumber;
-//    }
-
-    public void setMaxStationNumber(int maxStationNumber) {
-        this.maxStationNumber = maxStationNumber;
-    }
-
-    // методы для station
 
     public void next() {
         if (currentStationNumber == maxStationNumber) {
@@ -62,11 +47,10 @@ public class Radio {
 
 //     volume
 
-    public int getCurrentSoundVolume() {
-        return currentSoundVolume;
-    }
 
-    public void setCurrentSoundVolume(int currentSoundVolume) {
+    public Radio(int currentSoundVolume, int minSoundVolume, int maxSoundVolume, boolean mute) {
+        this.minSoundVolume = minSoundVolume;
+        this.maxSoundVolume = maxSoundVolume;
         if (currentSoundVolume > maxSoundVolume) {
             return;
         }
@@ -75,25 +59,12 @@ public class Radio {
         } else {
             this.currentSoundVolume = currentSoundVolume;
         }
+        this.mute = mute;
     }
 
-//    public int getMinSoundVolume() {
-//        return minSoundVolume;
-//    }
-
-    public void setMinSoundVolume(int minSoundVolume) {
-        this.minSoundVolume = minSoundVolume;
+    public int getCurrentSoundVolume() {
+        return currentSoundVolume;
     }
-
-//    public int getMaxSoundVolume() {
-//        return maxSoundVolume;
-//    }
-
-    public void setMaxSoundVolume(int maxSoundVolume) {
-        this.maxSoundVolume = maxSoundVolume;
-    }
-
-// методы для volume
 
     public void plus() {
         if (currentSoundVolume < maxSoundVolume) {

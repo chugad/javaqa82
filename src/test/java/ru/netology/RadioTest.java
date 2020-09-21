@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
-    Radio radio = new Radio();
 
 //    station
 
@@ -13,104 +12,74 @@ class RadioTest {
 
     @Test
     public void shouldNextStationNumberUnderLimitUp() {
-        radio.setMinStationNumber(0);
-        radio.setMaxStationNumber(9);
-        radio.setCurrentStationNumber(8);
+        Radio radio = new Radio(8, 0, 9);
         radio.next();
-        var expected = 9;
-        assertEquals(expected, radio.getCurrentStationNumber());
+        assertEquals(9, radio.getCurrentStationNumber());
     }
 
     @Test
     public void shouldNextStationNumberIfCurrentStationNine() {
-        radio.setMinStationNumber(0);
-        radio.setMaxStationNumber(9);
-        radio.setCurrentStationNumber(9);
+        Radio radio = new Radio(9, 0, 9);
         radio.next();
-        var expected = 0;
-        assertEquals(expected, radio.getCurrentStationNumber());
+        assertEquals(0, radio.getCurrentStationNumber());
     }
 
     @Test
     public void shouldNextStationNumberUnderLimitDown() {
-        radio.setMinStationNumber(0);
-        radio.setMaxStationNumber(9);
-        radio.setCurrentStationNumber(0);
+        Radio radio = new Radio(0, 0, 9);
         radio.next();
-        var expected = 1;
-        assertEquals(expected, radio.getCurrentStationNumber());
+        assertEquals(1, radio.getCurrentStationNumber());
     }
 
     @Test
     public void shouldNextStationNumberAfterLimitDown() {
-        radio.setMinStationNumber(0);
-        radio.setMaxStationNumber(9);
-        radio.setCurrentStationNumber(-100);
+        Radio radio = new Radio(-100, 0, 9);
         radio.next();
-        var expected = 1;
-        assertEquals(expected, radio.getCurrentStationNumber());
+        assertEquals(1, radio.getCurrentStationNumber());
     }
 
     @Test
     public void shouldNextStationNumberAfterLimitUp() {
-        radio.setMinStationNumber(0);
-        radio.setMaxStationNumber(9);
-        radio.setCurrentStationNumber(100);
+        Radio radio = new Radio(100, 0, 9);
         radio.next();
-        var expected = 1;
-        assertEquals(expected, radio.getCurrentStationNumber());
+        assertEquals(1, radio.getCurrentStationNumber());
     }
 
 // prev
 
     @Test
     public void shouldPrevStationNumberUnderLimitUp() {
-        radio.setMinStationNumber(0);
-        radio.setMaxStationNumber(9);
-        radio.setCurrentStationNumber(9);
+        Radio radio = new Radio(9,0,9);
         radio.prev();
-        var expected = 8;
-        assertEquals(expected, radio.getCurrentStationNumber());
+        assertEquals(8, radio.getCurrentStationNumber());
     }
 
     @Test
     public void shouldPrevStationNumberIfCurrentStationZero() {
-        radio.setMinStationNumber(0);
-        radio.setMaxStationNumber(9);
-        radio.setCurrentStationNumber(0);
+        Radio radio = new Radio(0,0,9);
         radio.prev();
-        var expected = 9;
-        assertEquals(expected, radio.getCurrentStationNumber());
+        assertEquals(9, radio.getCurrentStationNumber());
     }
 
     @Test
     public void shouldPrevStationNumberUnderLimitDown() {
-        radio.setMinStationNumber(0);
-        radio.setMaxStationNumber(9);
-        radio.setCurrentStationNumber(1);
+        Radio radio = new Radio(1,0,9);
         radio.prev();
-        var expected = 0;
-        assertEquals(expected, radio.getCurrentStationNumber());
+        assertEquals(0, radio.getCurrentStationNumber());
     }
 
     @Test
     public void shouldPrevStationNumberAfterLimitDown() {
-        radio.setMinStationNumber(0);
-        radio.setMaxStationNumber(9);
-        radio.setCurrentStationNumber(-100);
+        Radio radio = new Radio(-100,0,9);
         radio.prev();
-        var expected = 9;
-        assertEquals(expected, radio.getCurrentStationNumber());
+        assertEquals(9, radio.getCurrentStationNumber());
     }
 
     @Test
     public void shouldPrevStationNumberAfterLimitUp() {
-        radio.setMinStationNumber(0);
-        radio.setMaxStationNumber(9);
-        radio.setCurrentStationNumber(100);
+        Radio radio = new Radio(100,0,9);
         radio.prev();
-        var expected = 9;
-        assertEquals(expected, radio.getCurrentStationNumber());
+        assertEquals(9, radio.getCurrentStationNumber());
     }
 
 //    volume
@@ -119,83 +88,59 @@ class RadioTest {
 
     @Test
     public void shouldMinusSoundVolumeUnderLimitUp() {
-        radio.setMinSoundVolume(0);
-        radio.setMaxSoundVolume(10);
-        radio.setCurrentSoundVolume(10);
+        Radio radio = new Radio(10,0,10, false);
         radio.minus();
-        var expected = 9;
-        assertEquals(expected, radio.getCurrentSoundVolume());
+        assertEquals(9, radio.getCurrentSoundVolume());
     }
 
     @Test
     public void shouldMinusSoundVolumeUnderLimitDown() {
-        radio.setMinSoundVolume(0);
-        radio.setMaxSoundVolume(10);
-        radio.setCurrentSoundVolume(1);
+        Radio radio = new Radio(1,0,10,false);
         radio.minus();
-        var expected = 0;
-        assertEquals(expected, radio.getCurrentSoundVolume());
+        assertEquals(0, radio.getCurrentSoundVolume());
     }
 
     @Test
     public void shouldMinusSoundVolumeAfterLimitDown() {
-        radio.setMinSoundVolume(0);
-        radio.setMaxSoundVolume(10);
-        radio.setCurrentSoundVolume(-1);
+        Radio radio = new Radio(-1,0,10,false);
         radio.minus();
-        var expected = 0;
-        assertEquals(expected, radio.getCurrentSoundVolume());
+        assertEquals(0, radio.getCurrentSoundVolume());
     }
 
 //    plus
 
     @Test
     public void shouldPlusSoundVolumeUnderLimitUp() {
-        radio.setMinSoundVolume(0);
-        radio.setMaxSoundVolume(10);
-        radio.setCurrentSoundVolume(9);
+        Radio radio = new Radio(9,0,10,false);
         radio.plus();
-        var expected = 10;
-        assertEquals(expected, radio.getCurrentSoundVolume());
+        assertEquals(10, radio.getCurrentSoundVolume());
     }
 
     @Test
     public void shouldPlusSoundVolumeUnderLimitDown() {
-        radio.setMinSoundVolume(0);
-        radio.setMaxSoundVolume(10);
-        radio.setCurrentSoundVolume(0);
+        Radio radio = new Radio(0,0,10,false);
         radio.plus();
-        var expected = 1;
-        assertEquals(expected, radio.getCurrentSoundVolume());
+        assertEquals(1, radio.getCurrentSoundVolume());
     }
 
     @Test
     public void shouldPlusSoundVolumeBoardLineUp() {
-        radio.setMinSoundVolume(0);
-        radio.setMaxSoundVolume(10);
-        radio.setCurrentSoundVolume(10);
+        Radio radio = new Radio(10,0,10,false);
         radio.plus();
-        var expected = 10;
-        assertEquals(expected, radio.getCurrentSoundVolume());
+        assertEquals(10, radio.getCurrentSoundVolume());
     }
 
     @Test
     public void shouldPlusSoundVolumeAfterLimitUp() {
-        radio.setMinSoundVolume(0);
-        radio.setMaxSoundVolume(10);
-        radio.setCurrentSoundVolume(100);
+        Radio radio = new Radio(100,0,10,false);
         radio.plus();
-        var expected = 1;
-        assertEquals(expected, radio.getCurrentSoundVolume());
+        assertEquals(1, radio.getCurrentSoundVolume());
     }
 
     @Test
     public void shouldPlusSoundVolumeAfterLimitDown() {
-        radio.setMinSoundVolume(0);
-        radio.setMaxSoundVolume(10);
-        radio.setCurrentSoundVolume(-100);
+        Radio radio = new Radio(-100,0,10,false);
         radio.plus();
-        var expected = 1;
-        assertEquals(expected, radio.getCurrentSoundVolume());
+        assertEquals(1, radio.getCurrentSoundVolume());
     }
 }
