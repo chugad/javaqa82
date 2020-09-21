@@ -23,17 +23,13 @@ public class Radio {
         this.minStationNumber = minStationNumber;
         this.maxStationNumber = maxStationNumber;
         if (currentStationNumber > maxStationNumber) {
-            return;
+            currentStationNumber = minStationNumber;
         }
         if (currentStationNumber < minStationNumber) {
-            return;
+            currentStationNumber = minStationNumber;
         } else {
             this.currentStationNumber = currentStationNumber;
         }
-    }
-
-    public int getCurrentStationNumber() {
-        return currentStationNumber;
     }
 
     public void next() {
@@ -67,10 +63,6 @@ public class Radio {
             this.currentSoundVolume = currentSoundVolume;
         }
         this.mute = mute;
-    }
-
-    public int getCurrentSoundVolume() {
-        return currentSoundVolume;
     }
 
     public void plus() {
