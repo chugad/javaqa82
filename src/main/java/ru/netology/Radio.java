@@ -19,7 +19,7 @@ public class Radio {
             return;
         }
         if (currentStationNumber < minStationNumber) {
-            return;
+            currentStationNumber = minStationNumber;
         } else {
             this.currentStationNumber = currentStationNumber;
         }
