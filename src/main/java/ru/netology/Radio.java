@@ -16,10 +16,10 @@ public class Radio {
         this.minStationNumber = minStationNumber;
         this.maxStationNumber = maxStationNumber;
         if (currentStationNumber > maxStationNumber) {
-            currentStationNumber = minStationNumber;
+            this.currentStationNumber = minStationNumber;
         }
         if (currentStationNumber < minStationNumber) {
-            currentStationNumber = minStationNumber;
+            this.currentStationNumber = minStationNumber;
         } else {
             this.currentStationNumber = currentStationNumber;
         }
